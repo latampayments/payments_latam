@@ -20,7 +20,6 @@ model User {
   password Password?
   country    Country[]
   roles       Role[]
-  sessions    Session[]
   connections Connection[]
 }
 
@@ -82,20 +81,6 @@ model Steps {
   payment   Payment   @relation(fields: [paymentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   paymentId String
 
-}
-
-model Session {
-  id             String   @id @default(cuid())
-  expirationDate DateTime
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId String
-
-  // non-unique foreign key
-  @@index([userId])
 }
 
 model Permission {

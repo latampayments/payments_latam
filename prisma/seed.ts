@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 async function seed() {
   const email = "felipealisboa@outlook.com";
+  const username = "felipealisboa";
 
   await prisma.user.delete({ where: { email } }).catch(e => 'registers not found it.');
 
@@ -52,6 +53,7 @@ async function seed() {
   const user = await prisma.user.create({
     data: {
       email,
+      username,
       roles: { connect: [{ name: 'admin' }, { name: 'user' }] },
       password: {
         create: {

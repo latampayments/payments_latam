@@ -23,27 +23,22 @@ export async function POST(req: Request) {
         const { email, username, password} = UserSchema.parse(body);
         let userReady = await verifyUser(username, email);
         
-        if(userReady) {
+        if(!userReady) {
             const hashedPassword = await getPasswordHash(password)
     
-            const session = await prisma.session.create({
+            const user = await prisma.user.create({
                 data: {
-                    expirationDate: new Date(Date.now() + SESSION_EXPIRATION_TIME),
-                    user: {
-                        create: {
-                            email,
-                            username,
-                            password: {
-                                create: {
-                                    hash: hashedPassword,
-                                },
-                            },
-                        },
+                  email,
+                  username,
+                  roles: { connect: [{ name: 'user' }] },
+                  password: {
+                    create: {
+                      hash: hashedPassword,
                     },
+                  },
                 },
-                select: { id: true, expirationDate: true },
-            })
-            return NextResponse.json({user: session, message: 'Success'}, {status: 200})
+              });
+            return NextResponse.json({user: user, message: 'Success'}, {status: 201})
         }
     }catch(e){
         return NextResponse.json({message: 'Something went wrong'}, {status: 500})
@@ -73,5 +68,5 @@ export async function verifyUser(
     if (existingUsername) {
         return NextResponse.json({user: null, message: 'Username already exists'}, {status: 409})
     }
-    return {status: true}
+    return null;
 }

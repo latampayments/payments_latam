@@ -7,17 +7,55 @@ const prisma1 = new client_1.PrismaClient();
 
 async function seed() {
   const email = "felipealisboa@outlook.com";
+  const username = "felipealisboa";
 
-  // cleanup the existing database
-  // await prisma1.user.delete({ where: { email } }).catch(() => {
-    // no worries if it doesn't exist yet
-  // });
+  await prisma1.user.delete({ where: { email } }).catch(e => 'registers not found it.');
 
   const hashedPassword = await bcrypt.hash("97150280", 10);
+
+  console.time('🔑 Created permissions...')
+	const entities = ['user', 'note']
+	const actions = ['create', 'read', 'update', 'delete']
+	const accesses = ['own', 'any']
+	for (const entity of entities) {
+		for (const action of actions) {
+			for (const access of accesses) {
+				await prisma1.permission.create({ data: { entity, action, access } })
+			}
+		}
+	}
+
+  console.timeEnd('🔑 Created permissions...')
+
+	console.time('👑 Created roles...')
+	await prisma1.role.create({
+		data: {
+			name: 'admin',
+			permissions: {
+				connect: await prisma1.permission.findMany({
+					select: { id: true },
+					where: { access: 'any' },
+				}),
+			},
+		},
+	})
+	await prisma1.role.create({
+		data: {
+			name: 'user',
+			permissions: {
+				connect: await prisma1.permission.findMany({
+					select: { id: true },
+		  			where: { access: 'own' },
+				}),
+			},
+		},
+	})
+	console.timeEnd('👑 Created roles...')
 
   const user = await prisma1.user.create({
     data: {
       email,
+      username,
       roles: { connect: [{ name: 'admin' }, { name: 'user' }] },
       password: {
         create: {
