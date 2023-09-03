@@ -1,15 +1,11 @@
-import { buttonVariants } from '@/components/ui/button'
 import prisma from '@/lib/db';
-import Link from 'next/link'
+import Link from 'next/link';
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { GetServerSideProps, NextPage } from "next";
 import Image from 'next/image';
 
 interface Country {
