@@ -1,6 +1,5 @@
-'use client';
 import prisma from '@/lib/db';
-import { GetStaticProps, InferGetServerSidePropsType } from 'next/types';
+import { GetStaticProps } from 'next/types';
 import {
   Card,
   CardContent,
@@ -9,19 +8,31 @@ import {
 } from "@/components/ui/card"
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+
 
 interface Bank {
   id: string;
   name: string;
   logo: string;
+  countryId: string;
 
 }
-const Bank = ({banks}: InferGetServerSidePropsType<typeof getStaticProps>) => {
-  let data: Bank[] = banks
+const Bank = (props: { banks: Bank[], 
+  hasError: boolean }) => {
+    console.log('bank')
+    console.log(props)
+    let router = useRouter();
+    console.log(router)
+
+    if (props.hasError) {
+      return <h1>Error - please try another Country</h1>
+    }
+  
   return (
     <div className="static mt-[400px] flex justify-center p-2">
       <div className="w-full flex flex-wrap right-0 justify-around space-x-2 space-y-2 items-center lg:justify-between sm:justify-center md:justify-center">
-        {data.map((ct) => 
+        {props.banks.map((ct) => 
         <Link key={ct.id} href={`/payment/${ct.id}`} className='justify-center text-center'>
           <Card className='bg-slate-200'>
             <CardHeader>
@@ -46,14 +57,31 @@ const Bank = ({banks}: InferGetServerSidePropsType<typeof getStaticProps>) => {
 
 export default Bank
 
-export async function getStaticProps({params}: any) {
-  console.log(params)
-  let banks = await prisma.bank.findMany({
-    where: {countryId: params.countryId}
-  })
+export const getStaticProps: GetStaticProps = async (context) => {
+  console.log(context)
+  const data = await getBanks();
+  const countryID = context.params?.id as string;
+  let banks = data.filter(dt => dt.countryId === countryID);
+  if (!banks) {
+    return {
+      props: { hasError: true },
+    }
+  }
+
   return {
     props: {
       banks
     }
   }
 }
+export const getBanks = async() => {
+  const banks: Bank[] = await prisma.bank.findMany({
+    select: {
+      id: true,
+      name: true,
+      logo: true,
+      countryId: true
+    }
+  });
+  return banks
+};
