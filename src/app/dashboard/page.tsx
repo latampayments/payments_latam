@@ -4,7 +4,11 @@ import { getServerSession } from "next-auth";
 const dashboard = async() => {
     const session = await getServerSession(authOptions);
 
-    if(!session) return;
+    if(!session) {
+        return(
+            <h2 className='text-2xl'>Not logged in, you need to sign in to see the content.</h2>
+        )
+    };
 
     return(
         <div>
