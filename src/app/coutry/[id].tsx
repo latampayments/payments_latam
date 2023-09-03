@@ -25,11 +25,11 @@ interface CountryProps {
 export default async function Home() {
   let {countries} = await getCountries();
   return (
-    <div className="static mt-[400px] flex justify-center p-2">
+    <div className="static mt-10 justify-center p-2">
       <div className="w-full flex flex-wrap right-0 justify-around space-x-2 space-y-2 items-center lg:justify-between sm:justify-center md:justify-center">
         {countries.map((ct) => 
         <Link key={ct.id} href={`/country/${ct.id}`} className='justify-center text-center'>
-          <Card className='bg-slate-200'>
+          <Card>
             <CardHeader>
               <CardTitle>{ct.country}</CardTitle>
             </CardHeader>
@@ -39,7 +39,7 @@ export default async function Home() {
                   src={ct.flag}
                   alt={ct.country}
                   width={400}
-                  height={400}
+                  height={300}
                 />
             </CardContent>
           </Card>
