@@ -21,52 +21,32 @@ export async function POST(req: Request) {
     try{
         let body = await req.json();
         const { email, username, password} = UserSchema.parse(body);
-        let userReady = await verifyUser(username, email);
-        
-        if(!userReady) {
-            const hashedPassword = await getPasswordHash(password)
+        let userReady = await prisma.user.findUnique({where: {email}});
+        if (userReady) {
+            return NextResponse.json({user: null, message: 'Email already used'}, {status: 409})
+        }
     
-            const user = await prisma.user.create({
-                data: {
-                  email,
-                  username,
-                  roles: { connect: [{ name: 'user' }] },
-                  password: {
-                    create: {
-                      hash: hashedPassword,
-                    },
+        let existingUsername = await prisma.user.findUnique({where: {username}});
+        if (existingUsername) {
+            return NextResponse.json({user: null, message: 'Username already exists'}, {status: 409})
+        }
+        
+        const hashedPassword = await bcrypt.hash(password, 10)
+    
+          const user = await prisma.user.create({
+              data: {
+                email,
+                username,
+                roles: { connect: [{ name: 'user' }] },
+                password: {
+                  create: {
+                    hash: hashedPassword,
                   },
                 },
-              });
-            return NextResponse.json({user: user, message: 'Success'}, {status: 201})
-        }
+              },
+            });
+          return NextResponse.json({user: user, message: 'Success'}, {status: 201})
     }catch(e){
         return NextResponse.json({message: 'Something went wrong'}, {status: 500})
     }
-}
-
-export async function getPasswordHash(password: string) {
-	const hash = await bcrypt.hash(password, 10)
-	return hash
-}
-
-export async function verifyUser(
-    username: User['username'],
-	email: User['email']) {
-    let existingUserEmail = await prisma.user.findUnique({
-        where: {
-            email}
-    });
-    if (existingUserEmail) {
-        return NextResponse.json({user: null, message: 'Email already used'}, {status: 409})
-    }
-
-    let existingUsername = await prisma.user.findUnique({
-        where: {
-            username}
-    });
-    if (existingUsername) {
-        return NextResponse.json({user: null, message: 'Username already exists'}, {status: 409})
-    }
-    return null;
 }
