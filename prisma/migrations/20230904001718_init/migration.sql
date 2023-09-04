@@ -36,7 +36,7 @@ CREATE TABLE "Bank" (
 CREATE TABLE "Payment" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "type" TEXT NOT NULL,
-    "symbol" TEXT,
+    "symbol" TEXT NOT NULL,
     "limits" TEXT,
     "information" TEXT,
     "bankId" TEXT NOT NULL,

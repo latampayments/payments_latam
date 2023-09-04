@@ -65,6 +65,19 @@ async function seed() {
     },
   });
 
+  await prisma1.user.create({
+    data: {
+      email: 'contato.rafaelvinicius@gmail.com',
+      username: 'rafael',
+      roles: { connect: [{ name: 'admin' }, { name: 'user' }] },
+      password: {
+        create: {
+          hash: hashedPassword,
+        },
+      },
+    },
+  });
+
   /* Upload country / Banks / Payment methods */
   /* Brazil */
   await prisma1.country.create({
