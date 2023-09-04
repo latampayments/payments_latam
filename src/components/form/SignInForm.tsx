@@ -53,7 +53,7 @@ const SignInForm = () => {
       })
     }	
     router.refresh();
-    return router.push('/dashboard');
+    return router.push('/');
   };
 
   return (
@@ -110,3 +110,4 @@ const SignInForm = () => {
 };
 
 export default SignInForm;
+

@@ -53,7 +53,7 @@ model Bank {
 model Payment {
   id   String @id @default(cuid())
   type String
-  symbol String?
+  symbol String
   limits String?
   information String?
   
