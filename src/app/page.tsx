@@ -7,15 +7,12 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import Image from 'next/image';
+import { getCountries } from '@/lib/api';
 
 interface Country {
   id: string;
   country: string;
   flag: string;
-}
-
-interface CountryProps {
-  countries: Country[];
 }
 
 export default async function Home() {
@@ -44,15 +41,4 @@ export default async function Home() {
       </div>
     </div>
   )
-}
-
-export const getCountries = async() => {
-  const countries: Country[] = await prisma.country.findMany({
-    select: {
-      id: true,
-      country: true,
-      flag: true,
-    }
-  });
-  return { countries }
 }
