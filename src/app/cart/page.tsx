@@ -85,10 +85,10 @@ const CartPage = () => {
 
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[100px]">Produto</TableHead>
-                  <TableHead>Quantidade</TableHead>
-                  <TableHead className="text-right">Preço Unitário</TableHead>
-                  <TableHead className="text-right">Preço Total</TableHead>
+                  <TableHead className="w-[100px]">Product</TableHead>
+                  <TableHead>Quantity</TableHead>
+                  <TableHead className="text-right">Unit Price</TableHead>
+                  <TableHead className="text-right">Total Price</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
