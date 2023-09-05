@@ -107,7 +107,7 @@ const CartPage = () => {
           </CardContent>
 
           <CardFooter>
-            <div className="w-full flex flex-wrap right-0 justify-around space-x-4 space-y-4 items-center lg:justify-between sm:justify-center md:justify-center">
+            <div className="w-full flex flex-wrap items-center justify-between ">
               <Button>Back to home</Button>
 
               <Link href={`/method/`} className="justify-center text-center" />
