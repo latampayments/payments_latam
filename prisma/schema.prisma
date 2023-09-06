@@ -1,86 +1,84 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+}
 
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
-}
-
 model User {
-  id    String @id @default(cuid())
-  email String @unique
-  username String @unique
+  id        String   @id @default(cuid())
+  email     String   @unique
+  username  String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  password Password?
-  country    Country[]
+  password    Password?
+  country     Country[]
   roles       Role[]
   connections Connection[]
 }
 
 model Password {
-  hash String
+  hash   String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String @unique
 }
 
 model Country {
-  id String @id @default(cuid())
+  id      String @id @default(cuid())
   country String
-  flag String
+  flag    String
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String
-  banks Bank[]
+  banks  Bank[]
 }
 
 model Bank {
-  id String @id @default(cuid())
+  id   String @id @default(cuid())
   name String
   logo String
 
-  country   Country   @relation(fields: [countryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  country   Country @relation(fields: [countryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   countryId String
 
   payment Payment[]
 }
 
 model Payment {
-  id   String @id @default(cuid())
-  type String
-  symbol String
-  limits String?
+  id          String  @id @default(cuid())
+  type        String
+  symbol      String
+  limits      String?
   information String?
-  
+
   bank   Bank   @relation(fields: [bankId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   bankId String
 
-  steps Steps[] 
+  steps Steps[]
 }
 
 model Steps {
-  id String @id @default(cuid())
-  st1_pic String?
+  id       String  @id @default(cuid())
+  st1_pic  String?
   st1_text String?
-  st2_pic String?
+  st2_pic  String?
   st2_text String?
-  st3_pic String?
+  st3_pic  String?
   st3_text String?
-  st4_pic String?
+  st4_pic  String?
   st4_text String?
-  st5_pic String?
+  st5_pic  String?
   st5_text String?
-  st6_pic String?
+  st6_pic  String?
   st6_text String?
 
-  payment   Payment   @relation(fields: [paymentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  payment   Payment @relation(fields: [paymentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   paymentId String
-
 }
 
 model Permission {

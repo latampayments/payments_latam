@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({ datasources: {  db: { url: "postgres://postgres:PJi&4_dRcS2KwbQ@db.ffdinraeoulwnidqsphj.supabase.co:5432/postgres" } } });
 
 async function seed() {
   const email = "felipealisboa@outlook.com";

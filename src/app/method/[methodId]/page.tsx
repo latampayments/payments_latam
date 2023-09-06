@@ -1,12 +1,6 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import Link from 'next/link';
+
 import Image from 'next/image';
-import { getBanks, getMethods, getSteps } from '@/lib/api';
+import { getSteps } from '@/lib/api';
 
 type Params = {
   params: {
@@ -18,7 +12,7 @@ export default async function Method({ params: { methodId } }: Params) {
   let fetchedPmt = await getSteps();
   const pmtFetched = await Promise.all(fetchedPmt);
   let steps = pmtFetched.filter(dt => dt.paymentId === methodId);
-    
+
   return (
     <div className="static flex justify-center ">
       <div className="w-full flex flex-wrap right-0 justify-around space-x-4 space-y-4 items-center lg:justify-between sm:justify-center md:justify-center">
