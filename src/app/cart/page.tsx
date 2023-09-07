@@ -1,4 +1,4 @@
-"use Client";
+use client'
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import prisma from "@/lib/db";
@@ -70,6 +70,39 @@ const CartPage = () => {
   //   };
 
   return (
+    <Layout>
+      <h1>Seu Carrinho</h1>
+      <Table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Preço Unitário</th>
+            <th>Preço Total</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cartItems.map((item) => (
+            <tr key={item.id}>
+              <td>{item.productName}</td>
+              <td>{item.quantity}</td>
+              <td>{item.unitPrice}</td>
+              <td>{item.quantity * item.unitPrice}</td>
+              <td>
+                {/*<Button onClick={() => removeItemFromCart(item.id)}>
+                  Remover
+          </Button>*/}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+      {/* Adicione o resumo do pedido e opções de pagamento aqui */}
+      {/*<Button onClick={() => router.push("/checkout")}>Finalizar Compra</Button>*/}
+    </Layout>
+  );
+};
     <>
       <div>
         <Card>
