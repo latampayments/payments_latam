@@ -1,4 +1,4 @@
-'use Client'
+'use client'
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import prisma from "@/lib/db";
@@ -71,16 +71,16 @@ const CartPage = () => {
               <td>{item.unitPrice}</td>
               <td>{item.quantity * item.unitPrice}</td>
               <td>
-                <Button onClick={() => removeItemFromCart(item.id)}>
+                {/*<Button onClick={() => removeItemFromCart(item.id)}>
                   Remover
-                </Button>
+          </Button>*/}
               </td>
             </tr>
           ))}
         </tbody>
       </Table>
       {/* Adicione o resumo do pedido e opções de pagamento aqui */}
-      <Button onClick={() => router.push("/checkout")}>Finalizar Compra</Button>
+      {/*<Button onClick={() => router.push("/checkout")}>Finalizar Compra</Button>*/}
     </Layout>
   );
 };
