@@ -8,8 +8,10 @@ const prisma1 = new client_1.PrismaClient();
 async function seed() {
   const email = "felipealisboa@outlook.com";
   const username = "felipealisboa";
-
-  await prisma1.user.deleteMany().catch(e => 'registers not found it.');
+  
+  //await prisma1.user.deleteMany().catch(e => 'registers not found it.');
+  // await prisma1.permission.deleteMany();
+  //await prisma1.role.deleteMany();
 
   const hashedPassword = await bcrypt.hash("97150280", 10);
 
@@ -17,7 +19,6 @@ async function seed() {
 	const entities = ['user', 'note']
 	const actions = ['create', 'read', 'update', 'delete']
 	const accesses = ['own', 'any']
-  await prisma1.permission.deleteMany();
 	for (const entity of entities) {
 		for (const action of actions) {
 			for (const access of accesses) {
@@ -29,7 +30,6 @@ async function seed() {
   console.timeEnd('🔑 Created permissions...')
 
 	console.time('👑 Created roles...')
-  await prisma1.role.deleteMany();
 	await prisma1.role.create({
 		data: {
 			name: 'admin',
