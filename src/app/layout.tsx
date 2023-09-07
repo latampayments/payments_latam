@@ -24,11 +24,13 @@ export default function RootLayout({
     <html lang='en'>
       <body className={inter.className}>
         <Provider>
-          <main className='select-none h-screen flex flex-col justify-center items-center'>
+          <div className='flex flex-col space-y-2 py-2'>
             <Navbar />
-            {children}
-          </main>
-          <Toaster />
+            <main className='bg-[#D6E4F0] select-none py-4 flex flex-col justify-center items-center'>
+              {children}
+            </main>
+            <Toaster />
+          </div>
         </Provider>
       </body>
     </html>

@@ -7,6 +7,6 @@ export default function UserLogout() {
         <Button onClick={() => signOut({
             redirect: true,
             callbackUrl: `${window.location.origin}`
-        })} variant='destructive'>Sign Out</Button>
+        })} variant='outline'>Sign Out</Button>
     )    
 }
