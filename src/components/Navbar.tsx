@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { buttonVariants } from './ui/button';
-import { Home } from 'lucide-react';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import UserLogout from './ui/UserLogout';
+import { HandMetal, ShoppingCart, Home } from "lucide-react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import UserLogout from "./ui/UserLogout";
 
-const Navbar = async() => {
+const Navbar = async () => {
   const session = await getServerSession(authOptions);
   return (
     <>
