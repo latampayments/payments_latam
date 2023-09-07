@@ -28,11 +28,11 @@ export default async function Bank({ params: { bankId } }: Params) {
   }
 
   return (
-    <div className="static flex justify-center">
-      <div className="w-full flex flex-wrap right-0 justify-around space-x-4 space-y-4 items-center lg:justify-between sm:justify-center md:justify-center">
+    <div className="flex justify-center">
+      <div className="w-full flex flex-wrap space-x-4 space-y-4 lg:justify-between sm:justify-center md:justify-center">
         {methods.map((ct) => 
-        <Link key={ct.id} href={`/method/${ct.id}`} className='justify-center text-center'>
-        <Card className='bg-slate-200 text-center flex w-96 flex-col'>
+        <Link key={ct.id} href={`/method/${ct.id}`}>
+        <Card className='bg-[#F6F6F6] justify-center items-center px-1'>
             <CardHeader>
             <CardTitle>{ct.type}</CardTitle>
             <CardDescription>Limite {ct.limits}</CardDescription>

@@ -23,10 +23,10 @@ export default async function Method({ params: { methodId } }: Params) {
   }
 
   return (
-    <div className="static flex justify-center ">
-      <div className="w-full flex flex-wrap right-0 justify-around space-x-4 space-y-4 items-center lg:justify-between sm:justify-center md:justify-center">
+    <div className="flex justify-center">
+      <div className="w-full flex flex-wrap justify-around space-x-4 space-y-4 items-center ">
       {steps.map((ct: any) => (
-            <div key={ct.id} className="">
+            <div key={ct.id} className="justify-center items-center flex flex-col px-1">
               <div className="flex flex-col justify-center items-center text-center">
               <Image
                   className="rounded-sm h-48 w-48 object-cover object-center"
