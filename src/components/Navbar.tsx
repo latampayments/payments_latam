@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { buttonVariants } from './ui/button';
-import { HandMetal, ShoppingCart, Home } from "lucide-react";
+import { Home } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import UserLogout from "./ui/UserLogout";
