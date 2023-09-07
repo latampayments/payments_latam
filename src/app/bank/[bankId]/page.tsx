@@ -8,6 +8,9 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import { getMethods } from '@/lib/api';
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 type Params = {
   params: {
@@ -15,10 +18,15 @@ type Params = {
   }
 }
 export default async function Bank({ params: { bankId } }: Params) {
+  const session = await getServerSession(authOptions);
   let fetchedMethods = await getMethods();
   const methodsFetched = await Promise.all(fetchedMethods);
   let methods = methodsFetched.filter(dt => dt.bankId === bankId);
-    
+  
+  if (!session) {
+    return redirect('/sign-in');
+  }
+
   return (
     <div className="static flex justify-center">
       <div className="w-full flex flex-wrap right-0 justify-around space-x-4 space-y-4 items-center lg:justify-between sm:justify-center md:justify-center">
