@@ -1,25 +1,37 @@
 import Link from 'next/link';
 import { buttonVariants } from './ui/button';
-import { Home } from 'lucide-react';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import UserLogout from './ui/UserLogout';
+import { HandMetal, ShoppingCart, Home } from "lucide-react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import UserLogout from "./ui/UserLogout";
 
-const Navbar = async() => {
+const Navbar = async () => {
   const session = await getServerSession(authOptions);
   return (
     <div className=' bg-[#F6F6F6] py-2 border-b border-s-zinc-200 w-full'>
       <div className='flex items-center justify-around my-4'>
         <Link href='/'>
         <Home />
+    <div className=" bg-slate-200 py-2 border-b border-s-zinc-200 fixed w-full z-10 top-0">
+      <div className="container flex items-center justify-between">
+        <Link href="/">
+          <HandMetal />
         </Link>
         {session ? (
           <UserLogout />
-        ) :
-        <Link className={buttonVariants()} href='/sign-in'>
-          Sign in
-        </Link>
-        }
+        ) : (
+          <div className="flex items-center justify-end">
+            <div className="flex items-center justify-end pr-6"> 
+              <Link href="/cart">
+                <ShoppingCart />
+              </Link>
+            </div>
+
+            <Link className={buttonVariants()} href="/sign-in">
+              Sign in
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
