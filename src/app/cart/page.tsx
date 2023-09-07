@@ -1,4 +1,4 @@
-use client'
+'use client'
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import prisma from "@/lib/db";
@@ -70,7 +70,7 @@ const CartPage = () => {
   //   };
 
   return (
-    <Layout>
+    <>
       <h1>Seu Carrinho</h1>
       <Table>
         <thead>
@@ -100,9 +100,11 @@ const CartPage = () => {
       </Table>
       {/* Adicione o resumo do pedido e opções de pagamento aqui */}
       {/*<Button onClick={() => router.push("/checkout")}>Finalizar Compra</Button>*/}
-    </Layout>
+    </>
   );
 };
+export default CartPage;
+    /*
     <>
       <div>
         <Card>
@@ -114,7 +116,7 @@ const CartPage = () => {
           <CardContent>
             <Table>
           
-              {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
+              {/* <TableCaption>A list of your recent invoices.</TableCaption> 
 
               <TableHeader>
                 <TableRow>
@@ -125,7 +127,7 @@ const CartPage = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {cartItems.map((item) => (
+                {/*cartItems.map((item) => (
                 <TableRow key={item.id}>
            
                   <TableCell className="font-medium">{item.productName}</TableCell>
@@ -133,7 +135,7 @@ const CartPage = () => {
                   <TableCell className="text-right">${item.unitPrice}</TableCell>
                   <TableCell className="text-right">${item.quantity * item.unitPrice}</TableCell>
                 </TableRow>
-              ))}
+              ))
                 
               </TableBody>
             </Table>
@@ -151,7 +153,7 @@ const CartPage = () => {
         </Card>
       </div>
     </>
-  );
+  )
 };
+*/
 
-export default CartPage;
