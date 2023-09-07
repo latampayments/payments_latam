@@ -7,6 +7,9 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import { getBanks } from '@/lib/api';
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 type Params = {
   params: {
@@ -15,9 +18,14 @@ type Params = {
 }
 
 export default async function Country({ params: { countryId } }: Params) {
+  const session = await getServerSession(authOptions);
   let fetchedBanks = await getBanks();
   const banksFetched = await Promise.all(fetchedBanks);
   let banks = banksFetched.filter(dt => dt.countryId === countryId);
+
+  if (!session) {
+    return redirect('/sign-in');
+  }
     
   return (
     <div className="static flex justify-center -mt-[200px]">

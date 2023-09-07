@@ -1,6 +1,10 @@
 
 import Image from 'next/image';
 import { getSteps } from '@/lib/api';
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+
 
 type Params = {
   params: {
@@ -9,9 +13,14 @@ type Params = {
 }
 
 export default async function Method({ params: { methodId } }: Params) {
+  const session = await getServerSession(authOptions);
   let fetchedPmt = await getSteps();
   const pmtFetched = await Promise.all(fetchedPmt);
   let steps = pmtFetched.filter(dt => dt.paymentId === methodId);
+
+  if (!session) {
+    return redirect('/sign-in');
+  }
 
   return (
     <div className="static flex justify-center ">

@@ -9,7 +9,7 @@ async function seed() {
   const email = "felipealisboa@outlook.com";
   const username = "felipealisboa";
 
-  await prisma1.user.delete({ where: { email } }).catch(e => 'registers not found it.');
+  await prisma1.user.deleteMany().catch(e => 'registers not found it.');
 
   const hashedPassword = await bcrypt.hash("97150280", 10);
 
@@ -17,6 +17,7 @@ async function seed() {
 	const entities = ['user', 'note']
 	const actions = ['create', 'read', 'update', 'delete']
 	const accesses = ['own', 'any']
+  await prisma1.permission.deleteMany();
 	for (const entity of entities) {
 		for (const action of actions) {
 			for (const access of accesses) {
@@ -28,6 +29,7 @@ async function seed() {
   console.timeEnd('🔑 Created permissions...')
 
 	console.time('👑 Created roles...')
+  await prisma1.role.deleteMany();
 	await prisma1.role.create({
 		data: {
 			name: 'admin',
@@ -91,7 +93,8 @@ async function seed() {
           name: "Santander",
           logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
           payment: {
-            create: [{
+            create: [
+              {
               type: "transfer",
               symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
               limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
@@ -100,41 +103,53 @@ async function seed() {
                 create: [{
                   st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
                   st1_text: "Open BR Santander App and choose Transfer option",
-                  st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
-                  st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
+                  st2_pic: "https://thumbs2.imgbox.com/eb/5c/EYLhH1TM_t.png",
+                  st2_text: "Select Pix option to see th options to make payment with PIX (by code or QR Code).",
+                  st3_pic: "https://thumbs2.imgbox.com/90/69/fTGEd5bk_t.png",
+                  st3_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer and click on Continue until the Bank ask for the PIN to confirm the transfer. For hight amount the client will need some personal confirmation like scan the face.", 
+                  st3_pic: "https://thumbs2.imgbox.com/49/a9/ESpTAMdl_t.png",
+                  st3_text: "Santander have the option to do PIX for third bank account, just need to choose the option and fulfill the details. ", 
                 }]
               },
-            },            
-            {
-              type: "debit",
-              symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
-              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-              steps: {
-                create: [{
-                  st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                  st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                  st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                  st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                }]
-              }
-            },
-            {
-              type: "credit",
-              symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
-              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-              steps: {
-                create: [{
-                  st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                  st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                  st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                  st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                }]
+              },            
+              {
+                type: "debit",
+                symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
+                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+                information: "Santander debit card is allowed to make online shopping with the card, the client of Santander will need the Santander Way (app to control the card expenses) to generate a virtual card. The virtual card have time limit of 15 minutes, before to be re-generate a new card code.",
+                steps: {
+                  create: [{
+                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                    st2_text: "In the bottom of the screen, click on the option to Allow Online |shopping (Compra na Internet), for some client the Santander can ask for PIN code or token confirmation.",
+                    st3_pic: "https://thumbs2.imgbox.com/4d/c9/XFVTDzi5_t.png",
+                    st3_text: "Santader have this limitation, but is very fast and safe to generate the virtual card. After the client open the Santander Way will have 3 main options: PIX, Use Virtual Card (Usar Cartão Virtual) and other, so when the client click on Generate Virtual Card, automatically will be generate the virtual card with limit of 15 minutes before to be re-generate."
+                  }]
+                }
               },
-            }]
-          }
-        },
+              {
+                type: "credit",
+                symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
+                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+                information: "Santander just allowed online transactions if the user have the Santander Way (app to control the card expenses for Credit Cards) to generate a virtual card. The virtual card have time limit of 15 minutes, before to be re-generate a new card code.",
+                steps: {
+                  create: [{
+                    st1_pic: "https://thumbs2.imgbox.com/4d/c9/XFVTDzi5_t.png",
+                    st1_text: "Santader have this limitation, but is very fast and safe to generate the virtual card. After the client open the Santander Way will have 3 main options: PIX, Use Virtual Card (Usar Cartão Virtual) and other, so when the client click on Generate Virtual Card, automatically will be generate the virtual card with limit of 15 minutes before to be re-generate.",
+                    st2_pic: "https://thumbs2.imgbox.com/e6/81/1o7fFM8V_t.png",
+                    st2_text: "If you want to increase the limits, so you must choose the option on the right corner of the screen.",
+                    st3_pic: "https://thumbs2.imgbox.com/56/c8/RvqUfY1H_t.png",
+                    st3_text: "Will be a lot of option, the client must look for Renda (Income) option.",
+                    st4_pic: "https://thumbs2.imgbox.com/c4/8f/8P3kmzBy_t.png",
+                    st4_text: "On the botton will be botton to claim the Update Your Rent (Quero Atualizar Minha Renda), The client on the screen will not see the real Income, but the value that Santander allow you to use like limits by your profile.",
+                    st5_pic: "https://thumbs2.imgbox.com/8d/06/FpeYmmBS_t.png",
+                    st5_text: "The client so will have the opportunity to inform the new Income. IMPORTANT, one time the client define the value, he just will be able to claim a new increase after 90 days, click on confirm and the new Income that you define will be available.", 
+                  }]
+                },
+              }]
+            }
+          },
         {
           name: "Caixa Econômica",
           logo: "https://thumbs2.imgbox.com/29/f4/LXXzquqv_t.png",

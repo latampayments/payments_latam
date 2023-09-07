@@ -51,7 +51,6 @@ export const getCountries = async() => {
   return { countries }
 }
 
-
 export const getBanks = async() => {
   const banks: Bank[] = await prisma.bank.findMany({
     select: {
