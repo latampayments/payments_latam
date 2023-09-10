@@ -9,8 +9,8 @@ import { useEffect } from 'react';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Latam Banks',
-  description: 'Payment methods explanations for all Latam banks and details for each one',
+  title: 'Latam Payments',
+  description: 'Payment methods explanation for all Latam banks and details for each one.Alternative payment methods and digital options.',
 };
 
 export default function RootLayout({
@@ -22,6 +22,13 @@ export default function RootLayout({
 
   return (
     <html lang='en'>
+      <head>
+        <link rel="icon" type="image/png" sizes="192x192"  href="/favicons/android-icon-192x192.png"/>
+        <link rel="icon" type="image/png" sizes="512x512"  href="/favicons/android-icon-192x192.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png"/>
+        <link rel="manifest" href="/favicons/manifest.json" />
+      </head>
       <body className={inter.className}>
         <Provider>
           <div className='flex flex-col space-y-2 py-2'>

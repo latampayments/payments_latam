@@ -28,11 +28,11 @@ export default async function Country({ params: { countryId } }: Params) {
   }
     
   return (
-    <div className="flex justify-center">
-      <div className="w-full flex flex-wrap justify-around space-x-4 space-y-4 items-center ">
+    <div>
+      <div className="w-full flex flex-wrap justify-around space-x-4 space-y-4 items-center">
         {banks.map((ct) => 
-        <Link key={ct.id} href={`/bank/${ct.id}`} className='justify-center text-center'>
-        <Card className='bg-[#F6F6F6] justify-center items-center px-1'>
+        <Link key={ct.id} href={`/bank/${ct.id}`} className=''>
+        <Card className='bg-[#F6F6F6] flex flex-col text-center'>
             <CardHeader>
             <CardTitle>{ct.name}</CardTitle>
             </CardHeader>
