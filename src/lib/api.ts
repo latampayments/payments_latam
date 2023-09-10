@@ -38,7 +38,35 @@ interface Steps {
   st6_text: string | null;
   paymentId: string;
 }
-  
+
+export const getBankById = async(name: string) => {
+  if(typeof name !== 'string') return
+
+  const data: Array<Bank & { country: Country }> = await prisma.bank.findMany({
+    where: {
+        OR: [
+            {
+                name: {
+                        contains: name,
+                        mode: "insensitive",
+                    }
+            },
+            {
+                country: {
+                    country: {
+                        contains: name,
+                        mode: "insensitive",
+                    }
+                }
+            },
+        ] 
+    },
+    include: {
+        country: true,
+    },
+  });
+  return { data }
+}
 export const fetchDataByQuery = async(query: string) => {
   const countries: Country[] = await prisma.country.findMany({
     select: {

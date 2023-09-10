@@ -28,7 +28,6 @@ export default async function Country({ params: { countryId } }: Params) {
   }
     
   return (
-    <div>
       <div className="w-full flex flex-wrap justify-around space-x-4 space-y-4 items-center">
         {banks.map((ct) => 
         <Link key={ct.id} href={`/bank/${ct.id}`} className=''>
@@ -48,8 +47,6 @@ export default async function Country({ params: { countryId } }: Params) {
         </Card>
         </Link>
         )}
-    </div>
-    </div>
-    
+      </div>
     )
 }

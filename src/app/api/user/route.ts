@@ -1,11 +1,11 @@
 import { User, Password } from "@prisma/client";
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
 import  prisma  from "@/lib/db";
 import bcrypt from "bcryptjs";
 import * as z from 'zod';
 // import { zodResolver } from '@hookform/resolvers/zod';
 
-const SESSION_EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 30
+//const SESSION_EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 30
 
 const UserSchema = z
   .object({
