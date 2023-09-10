@@ -17,9 +17,7 @@ const Navbar = async () => {
             <Image src='/logo.png' alt='Latam Payments' width={300} height={100} className='rounded bg-inherit' />
           </Link>
           <div>
-            <React.Suspense fallback={<div>Loading...</div>}>
-              <SearchBar />
-            </React.Suspense>
+            <SearchBar />
           </div>
           {session ? (
             <UserLogout />
