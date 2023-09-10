@@ -39,6 +39,45 @@ interface Steps {
   paymentId: string;
 }
   
+export const fetchDataByQuery = async(query: string) => {
+  const countries: Country[] = await prisma.country.findMany({
+    select: {
+      id: true,
+      country: true,
+      flag: true,
+    },
+    where: {
+      country: {
+        contains: query,
+      },
+    },
+  });
+  const banks: Bank[] = await prisma.bank.findMany({
+    select: {
+      id: true,
+      name: true,
+      logo: true,
+      countryId: true
+    },
+    where: {
+      name: {
+        contains: query,
+      },
+    },
+  })
+
+  const methods: Methods[] = await prisma.payment.findMany({
+    select: { id: true, type: true, symbol: true, limits: true, information: true, bankId: true},
+    where: {
+      type: {
+        contains: query,
+      },
+    }
+  })
+
+  let queryResult = methods ? methods : banks ? banks : countries ? countries : [];
+  return { queryResult }
+};
 
 export const getCountries = async() => {
   const countries: Country[] = await prisma.country.findMany({

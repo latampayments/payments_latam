@@ -7,7 +7,7 @@ async function seed() {
   const email = "felipealisboa@outlook.com";
   const username = "felipealisboa";
 
-  await prisma.user.delete({ where: { email } }).catch(e => 'registers not found it.');
+  // await prisma.user.delete({ where: { email } }).catch(e => 'registers not found it.');
 
   const hashedPassword = await bcrypt.hash("97150280", 10);
 

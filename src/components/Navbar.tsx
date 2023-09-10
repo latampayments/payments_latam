@@ -1,9 +1,11 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { buttonVariants } from './ui/button';
-import { Home } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import UserLogout from "./ui/UserLogout";
+import SearchBar from '@/app/search-bar';
+import * as React from 'react';
 
 const Navbar = async () => {
   const session = await getServerSession(authOptions);
@@ -12,8 +14,13 @@ const Navbar = async () => {
       <div className='bg-[#F6F6F6] py-2 border-b border-s-zinc-200 w-full'>
         <div className='flex items-center justify-around my-4'>
           <Link href='/'>
-          <Home />
+            <Image src='/logo.png' alt='Latam Payments' width={300} height={100} className='rounded bg-inherit' />
           </Link>
+          <div>
+            <React.Suspense fallback={<div>Loading...</div>}>
+              <SearchBar />
+            </React.Suspense>
+          </div>
           {session ? (
             <UserLogout />
           ) :
