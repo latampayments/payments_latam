@@ -155,7 +155,7 @@ export const getLimits = async() => {
   return { limits }
 }
 export const getMethods = async() => {
-  const methods: Array<Payment> = await prisma.payment.findMany({
+  const methods: Array<Methods> = await prisma.payment.findMany({
     select: { id: true, type: true, symbol: true, limits: true, information: true, bankId: true}
   });
   return methods
