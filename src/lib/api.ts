@@ -1,5 +1,6 @@
 import prisma from '@/lib/db';
-
+import { Bank, Country, Payment, Steps } from '@prisma/client';
+/* 
 interface Country {
   id: string;
   country: string;
@@ -38,7 +39,7 @@ interface Steps {
   st6_text: string | null;
   paymentId: string;
 }
-
+ */
 export const getBankById = async(name: string) => {
   if(typeof name !== 'string') return
 
@@ -68,11 +69,12 @@ export const getBankById = async(name: string) => {
   return { data }
 }
 export const fetchDataByQuery = async(query: string) => {
-  const countries: Country[] = await prisma.country.findMany({
+  const countries: Array<Country> = await prisma.country.findMany({
     select: {
       id: true,
       country: true,
       flag: true,
+      userId: true,
     },
     where: {
       country: {
@@ -80,7 +82,7 @@ export const fetchDataByQuery = async(query: string) => {
       },
     },
   });
-  const banks: Bank[] = await prisma.bank.findMany({
+  const banks: Array<Bank> = await prisma.bank.findMany({
     select: {
       id: true,
       name: true,
@@ -94,7 +96,7 @@ export const fetchDataByQuery = async(query: string) => {
     },
   })
 
-  const methods: Methods[] = await prisma.payment.findMany({
+  const methods: Array<Payment> = await prisma.payment.findMany({
     select: { id: true, type: true, symbol: true, limits: true, information: true, bankId: true},
     where: {
       type: {
@@ -130,16 +132,36 @@ export const getBanks = async() => {
   return banks
 };
 
-
+export const getLimits = async() => {
+  const limits: any = await prisma.country.findMany({
+    select: {
+      country: true,
+      banks: {
+        select: {
+          name: true,
+          payment: {
+            select: {
+              id: true,
+              type: true,
+              limits: true,
+              information: true
+            }
+          }
+        },
+      },
+    }
+  })
+  return { limits }
+}
 export const getMethods = async() => {
-  const methods: Methods[] = await prisma.payment.findMany({
+  const methods: Array<Payment> = await prisma.payment.findMany({
     select: { id: true, type: true, symbol: true, limits: true, information: true, bankId: true}
   });
   return methods
 };
 
 export const getSteps = async() => {
-  const steps: Steps[] = await prisma.steps.findMany({
+  const steps: Array<Steps> = await prisma.steps.findMany({
     select: {id: true, st1_pic: true, st1_text: true, st2_pic: true, st2_text: true, st3_pic: true, st3_text: true, st4_pic: true, st4_text: true, st5_pic: true, st5_text: true, st6_pic: true, st6_text: true, paymentId: true
     }
   });

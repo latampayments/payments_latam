@@ -3,8 +3,7 @@ import Image from 'next/image';
 import { buttonVariants } from './ui/button';
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import UserLogout from "./ui/UserLogout";
-import SearchBar from '@/app/search-bar';
+import DropDownMenuForm from '@/components/form/DropDownMenuForm';
 import * as React from 'react';
 
 const Navbar = async () => {
@@ -17,10 +16,9 @@ const Navbar = async () => {
             <Image src='/logo.png' alt='Latam Payments' width={300} height={100} className='rounded bg-inherit' />
           </Link>
           <div>
-            <SearchBar />
           </div>
           {session ? (
-            <UserLogout />
+            <DropDownMenuForm />
           ) :
           <Link className={buttonVariants()} href='/sign-in'>
             Sign in
