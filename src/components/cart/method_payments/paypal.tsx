@@ -51,7 +51,7 @@ const ButtonWrapper = ({ showSpinner }:any) => {
       <>
           { (showSpinner && isPending) && <div className="spinner" /> }
           <PayPalButtons
-              style={style}
+              style={{layout: "vertical"}}
               disabled={false}
               forceReRender={[style]}
               fundingSource={undefined}
