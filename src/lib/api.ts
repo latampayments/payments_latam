@@ -1,6 +1,6 @@
 import prisma from '@/lib/db';
-import { Bank, Country, Payment, Steps } from '@prisma/client';
-/* 
+//import { Bank, Payment, Steps } from '@prisma/client';
+ 
 interface Country {
   id: string;
   country: string;
@@ -39,7 +39,7 @@ interface Steps {
   st6_text: string | null;
   paymentId: string;
 }
- */
+
 export const getBankById = async(name: string) => {
   if(typeof name !== 'string') return
 
@@ -110,11 +110,12 @@ export const fetchDataByQuery = async(query: string) => {
 };
 
 export const getCountries = async() => {
-  const countries: Country[] = await prisma.country.findMany({
+  const countries: Array<Country> = await prisma.country.findMany({
     select: {
       id: true,
       country: true,
       flag: true,
+      userId: true
     }
   });
   return { countries }
