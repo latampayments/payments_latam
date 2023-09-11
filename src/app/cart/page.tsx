@@ -11,18 +11,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import CartProduct from "@/components/cart/stepProduct";
 import SignUpForm from "@/components/form/SignUpForm";
 import StepPayments from "@/components/cart/stepPayments";
+import Script from "next/script";
+import SignInForm from "@/components/form/SignInForm";
+import { Loader2 } from "lucide-react";
 
 interface CartItem {
   id: number;
@@ -90,9 +84,13 @@ const CartPage = () => {
   return (
     <>
       <Card>
+        <Script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></Script>
         <CardHeader>
           <CardTitle>Your cart</CardTitle>
           <CardDescription>Itens in your cart</CardDescription>
+          <p className="step-guide">
+            {currentStep + 1} de {steps.length}
+          </p>
         </CardHeader>
 
         {steps[currentStep].id === "CART" && (
@@ -101,28 +99,37 @@ const CartPage = () => {
         {steps[currentStep].id === "PESONAL" && (
           <>
             <CardContent>
-              <SignUpForm/>
+              <SignInForm />
             </CardContent>
           </>
         )}
-        {steps[currentStep].id === "PAYMENT" && <StepPayments/>}
-        {steps[currentStep].id === "LOGIN" && <Card>ENTRAR</Card>}
+        {steps[currentStep].id === "PAYMENT" && <StepPayments />}
+
+        {steps[currentStep].id === "LOGIN" && (
+          <Button disabled className="w-full">
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Please wait
+          </Button>
+        )}
 
         <CardFooter>
           <div className="w-full flex flex-wrap items-center justify-between p-3">
-            {currentStep < steps.length + 1 && (
-              <Button className="m-3 "onClick={prevFormStep}>Back</Button>
+            {currentStep != 0 && (
+              <Button className="m-3 " onClick={prevFormStep}>
+                Back
+              </Button>
             )}
             {currentStep < steps.length - 1 && (
-              <Button className="m-3 " onClick={nextFormStep}>Next</Button>
-            )}
-
-            {currentStep === steps.length - 1 && (
-              <Button className="m-3 " onClick={()=>console.log("enviou")}>
-                Enviar
+              <Button className="m-3 " onClick={nextFormStep}>
+                Next
               </Button>
             )}
 
+            {currentStep === steps.length - 1 && (
+              <Button className="m-3 " onClick={() => console.log("enviou")}>
+                Enviar
+              </Button>
+            )}
           </div>
         </CardFooter>
       </Card>

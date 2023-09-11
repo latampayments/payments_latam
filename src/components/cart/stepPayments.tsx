@@ -2,13 +2,11 @@
 import React, { useState } from "react";
 
 import {
-  Card,
+
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+
 } from "@/components/ui/card";
+import PaypalMethod from "./method_payments/paypal";
 
 const StepPayments = (props: any) => {
   //   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -16,7 +14,7 @@ const StepPayments = (props: any) => {
   return (
     <>
       <CardContent>
-        <Card>PAYPALL</Card>
+        <PaypalMethod/>
       </CardContent>
     </>
   );
