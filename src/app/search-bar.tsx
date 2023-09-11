@@ -28,8 +28,8 @@ export default function SearchBar() {
     
     return (
         <div>
-            <form method="GET" className="flex justify-center w-2/3" onSubmit={onSearch}>
-                <Input value={searchQuery || ""} onChange={(e) => setSearchQuery(e.target.value)} className='px-5 py-1 w-2/3 sm:px-5 sm:py-3 flex-1 text-slate-900' placeholder='Search for a Bank' />
+            <form method="GET" className="px-2 flex justify-center w-full" onSubmit={onSearch}>
+                <Input value={searchQuery || ""} onChange={(e) => setSearchQuery(e.target.value)} className='px-5 py-1 w-2/3 sm:px-5 sm:py-3 flex-1 text-slate-900' placeholder='Search for a Bank'  aria-label='Insert the bank name' />
 
             </form>
         </div> 
