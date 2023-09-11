@@ -110,11 +110,12 @@ export const fetchDataByQuery = async(query: string) => {
 };
 
 export const getCountries = async() => {
-  const countries: Country[] = await prisma.country.findMany({
+  const countries: Array<Country> = await prisma.country.findMany({
     select: {
       id: true,
       country: true,
       flag: true,
+      userId: true
     }
   });
   return { countries }
