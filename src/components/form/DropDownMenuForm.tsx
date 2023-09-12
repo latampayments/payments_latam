@@ -21,7 +21,7 @@ const DropDownMenuForm = () => {
                 <SearchBar />
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                    <Link href='/limits' className='flex w-full px-2' aria-label='Limits'>
+                    <Link href='/limits' className='flex w-full' aria-label='Limits'>
                         <Button variant='outline' className=' justify-center w-full'>Limits</Button>
                     </Link>
                 </DropdownMenuItem>

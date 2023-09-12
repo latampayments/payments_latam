@@ -19,18 +19,18 @@ async function seed() {
 	const entities = ['user', 'note']
 	const actions = ['create', 'read', 'update', 'delete']
 	const accesses = ['own', 'any']
-	for (const entity of entities) {
+	/* for (const entity of entities) {
 		for (const action of actions) {
 			for (const access of accesses) {
 				await prisma1.permission.create({ data: { entity, action, access } })
 			}
 		}
-	}
+	} */
 
   console.timeEnd('🔑 Created permissions...')
-
+  /*
 	console.time('👑 Created roles...')
-	await prisma1.role.create({
+	 await prisma1.role.create({
 		data: {
 			name: 'admin',
 			permissions: {
@@ -53,8 +53,9 @@ async function seed() {
 		},
 	})
 	console.timeEnd('👑 Created roles...')
-
-  const user = await prisma1.user.create({
+*/
+/*  
+const user = await prisma1.user.create({
     data: {
       email,
       username,
@@ -79,10 +80,13 @@ async function seed() {
       },
     },
   });
-
+*/
   /* Upload country / Banks / Payment methods */
   /* Brazil */
-  await prisma1.country.create({
+  await prisma1.country.update({
+    where: {
+      country: "Brazil",
+    },
     data: {
       userId: user.id,
       country: "Brazil",
@@ -360,7 +364,10 @@ async function seed() {
   });
 
     /* Chile */
-  await prisma1.country.create({
+  await prisma1.country.update({
+    where: {
+      country: "Chile"
+    },
     data: {
       userId: user.id,
       country: "Chile",
@@ -419,7 +426,10 @@ async function seed() {
   });
   
     /* Mexico */
-  await prisma1.country.create({
+  await prisma1.country.update({
+    where: {
+      country: "Mexico"
+    },
     data: {
       userId: user.id,
       country: "Mexico",
@@ -478,7 +488,10 @@ async function seed() {
   });
   
     /* Peru */
-  await prisma1.country.create({
+  await prisma1.country.update({
+    where: {
+      country: "Peru"
+    },
     data: {
       userId: user.id,
       country: "Peru",
@@ -537,7 +550,13 @@ async function seed() {
   });
 
     /* Argentina */
-    await prisma1.country.create({
+    await prisma1.country.update({
+      where: {
+        country: "Argentina"
+      },
+      where: {
+        country: "Argentina"
+      },
       data: {
         userId: user.id,
         country: "Argentina",
@@ -737,7 +756,10 @@ async function seed() {
     });
   
       /* Bolivia */
-    await prisma1.country.create({
+    await prisma1.country.update({
+      where: {
+        country: "Bolivia"
+      },
       data: {
         userId: user.id,
         country: "Bolivia",
@@ -796,7 +818,10 @@ async function seed() {
     });
     
       /* Colombia */
-    await prisma1.country.create({
+    await prisma1.country.update({
+      where: {
+        country: "Colombia"
+      },
       data: {
         userId: user.id,
         country: "Colombia",
@@ -855,7 +880,10 @@ async function seed() {
     });
     
       /* Guatemala */
-    await prisma1.country.create({
+    await prisma1.country.update({
+      where: {
+        country: "Guatemala"
+      },
       data: {
         userId: user.id,
         country: "Guatemala",
@@ -914,7 +942,10 @@ async function seed() {
     });
   
       /* El Salvador */
-      await prisma1.country.create({
+      await prisma1.country.update({
+        where: {
+          country: "El Salvador"
+        },
         data: {
           userId: user.id,
           country: "El Salvador",
@@ -973,7 +1004,10 @@ async function seed() {
       });
 
       /* Ecuador */
-      await prisma1.country.create({
+      await prisma1.country.update({
+        where: {
+          country: "Ecuador"
+        },
         data: {
           userId: user.id,
           country: "Ecuador",
@@ -1032,7 +1066,10 @@ async function seed() {
       });
 
        /* Honduras */
-       await prisma1.country.create({
+       await prisma1.country.update({
+        where: {
+          country: "Honduras"
+        },
         data: {
           userId: user.id,
           country: "Honduras",
@@ -1091,7 +1128,10 @@ async function seed() {
       });
 
        /* Costa Rica */
-       await prisma1.country.create({
+       await prisma1.country.update({
+        where: {
+          country: "Costa Rica"
+        },
         data: {
           userId: user.id,
           country: "Costa Rica",

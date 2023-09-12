@@ -22,11 +22,11 @@ export default async function Method({ params: { methodId } }: Params) {
   }
 
   return (
-    <div className="flex justify-center">
-      <div className="w-full flex flex-wrap justify-around space-x-4 space-y-4 items-center ">
+    <div className="flex flex-wrap w-full justify-center items-start">
       {steps.map((ct: any) => (
-            <div key={ct.id} className="justify-center items-center flex flex-col px-1">
-              <div className="flex flex-col justify-center items-center text-center">
+          <div key={ct.id} className="">
+            {ct.st1_pic && <div>
+              <div className="px-2 flex flex-row text-lg w-full">
               <Image
                   className="rounded-sm h-48 w-48 object-cover object-center"
                   src={ct.st1_pic}
@@ -34,52 +34,80 @@ export default async function Method({ params: { methodId } }: Params) {
                   width={400}
                   height={400}
               />
-              <div className="flex flex-col px-2">
-                <h3 className="font-bold pl-2">{ct.st1_text}</h3>
-              </div>
-              <br />
-              <Image
-                  className="rounded-sm h-48 w-48 object-cover object-center"
-                  src={ct.st2_pic}
-                  alt=""
-                  width={400}
-                  height={400}
-              />
-              <div className="flex flex-col px-2">
-                <h3 className="font-bold pl-2">{ct.st2_text}</h3>
-              </div>
-              <br />
-              {/*<img
-                className="rounded-sm object-cover object-center"
-                src={ct.st3_pic}
-                alt=""
-              />
-              <div className="flex flex-col px-2">
-                <h3 className="font-bold pl-2">{ct.st3_text}</h3>
-              </div>
-              <br />
-              <img
-                className="rounded-sm object-cover object-center"
-                src={ct.st4_pic}
-                alt=""
-              />
-              <div className="flex flex-col px-2">
-                <h3 className="font-bold pl-2">{ct.st4_text}</h3>
-              </div>
-              <br />
-              <img
-                className="rounded-sm object-cover object-center"
-                src={ct.st5_pic}
-                alt=""
-              />
-              <div className="flex flex-col px-2">
-                <h3 className="font-bold pl-2">{ct.st5_text}</h3>
-              </div>*/}
+              <h3 className="pl-2 flex w-80">{ct.st1_text}</h3>
             </div>
           </div>
-        ))}
+          }
+          <br />
+          {ct.st2_pic && <div>
+            <div className="px-2 flex flex-row text-lg w-full">
+            <Image
+            className="rounded-sm h-48 w-48 object-cover object-center"
+            src={ct.st2_pic}
+            alt=""
+            width={400}
+            height={400}
+        />
+            <h3 className="pl-2 flex w-80">{ct.st2_text}</h3>
+          </div>
+        </div>}
+        <br />
+        {ct.st3_pic && <div>
+          <div className="px-2 flex flex-row text-lg w-full">
+            <Image
+                className="rounded-sm h-48 w-48 object-cover object-center"
+                src={ct.st3_pic}
+                alt=""
+                width={400}
+                height={400}
+            />
+              <h3 className="pl-2 flex w-80">{ct.st3_text}</h3>
+            </div>
+          </div>
+          }
+          <br />
+          {ct.st4_pic && <div>
+            <div className="px-2 flex flex-row text-lg w-full">
+            <Image
+            className="rounded-sm h-48 w-48 object-cover object-center"
+            src={ct.st4_pic}
+            alt=""
+            width={400}
+            height={400}
+        />
+            <h3 className="pl-2 flex w-80">{ct.st4_text}</h3>
+          </div>
+          </div>}
+          <br />
+          {ct.st5_pic && <div>
+            <div className="px-2 flex flex-row text-lg w-full">
+            <Image
+                className="rounded-sm h-48 w-48 object-cover object-center"
+                src={ct.st5_pic}
+                alt=""
+                width={400}
+                height={400}
+            />
+              <h3 className="pl-2 flex w-80">{ct.st5_text}</h3>
+            </div>
+          </div>
+          }
+          <br />
+          {ct.st6_pic && <div>
+            <div className="px-2 flex flex-row text-lg w-full">
+            <Image
+            className="rounded-sm h-48 w-48 object-cover object-center"
+            src={ct.st6_pic}
+            alt=""
+            width={400}
+            height={400}
+          />
+              <h3 className="pl-2 flex w-80">{ct.st6_text}</h3>
+            </div>
+          </div>}
+          <br />
+        </div>
+      ))}
     </div>
-    </div>
-    
     )
 }
