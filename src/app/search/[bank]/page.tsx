@@ -51,12 +51,12 @@ const SearchPage = async({ params: { bank } }: Params) => {
             Showing results for:{" "}
             <span className="font-semibold">{bankName}</span>
             </span>
-            <div className="w-full flex flex-wrap justify-center space-x-4 space-y-4 items-center text-black">
+            <div className="flex w-full flex-wrap justify-around items-start">
                 {data ? data.map((ct: any) => 
                 <Link key={ct.id} href={`/bank/${ct.id}`} className=''>
-                <Card className='bg-[#F6F6F6] flex flex-col text-center'>
+                <Card className='flex flex-col bg-[#126E82] m-4 p-4 text-center'>
                     <CardHeader>
-                    <CardTitle>{ct.country.country} {ct.name}</CardTitle>
+                    <CardTitle className='text-sm'>{ct.country.country}{` > `}{ct.name}</CardTitle>
                     </CardHeader>
                     <CardContent>
                     <Image
@@ -70,7 +70,11 @@ const SearchPage = async({ params: { bank } }: Params) => {
                 </Card>
                 </Link>
                 ) : 
-                <h1>No results</h1>}
+                <button type="button" className="bg-indigo-500 ..." disabled>
+                    <svg className="motion-reduce:hidden animate-spin ..." viewBox="0 0 24 24"></svg>
+                    Processing...
+                </button>
+                }
             </div>
         </>
     )

@@ -24,7 +24,7 @@ export default async function Method({ params: { methodId } }: Params) {
   return (
     <div className="flex flex-wrap w-full justify-center items-start">
       {steps.map((ct: any) => (
-          <div key={ct.id} className="">
+          <div key={ct.id} className="mt-2">
             {ct.st1_pic && <div>
               <div className="px-2 flex flex-row text-lg w-full">
               <Image

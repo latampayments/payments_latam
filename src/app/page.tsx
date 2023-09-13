@@ -13,10 +13,10 @@ export default async function Home() {
 
   return (
     <>
-      <div className="flex w-full flex-wrap justify-around space-x-4 items-start">
+      <div className="flex w-full flex-wrap justify-around items-start">
         {countries.map((ct) => 
         <Link key={ct.id} href={`/country/${ct.id}`} >
-          <Card className='flex flex-col bg-[#F6F6F6] mt-4'>
+          <Card className='flex flex-col bg-[#126E82] m-4 p-4 text-center'>
             <CardHeader>
               <CardTitle>{ct.country}</CardTitle>
             </CardHeader>
