@@ -27,6 +27,9 @@ export default async function Home() {
                   alt={ct.country}
                   width={400}
                   height={400}
+                  security='https'
+                  placeholder="blur"
+                  blurDataURL={ct.flag}
                 />
             </CardContent>
           </Card>

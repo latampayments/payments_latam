@@ -32,7 +32,7 @@ export default function RootLayout({
         <Provider>
           <div className='flex flex-col'>
             <Navbar />
-            <main className='bg-[#51C4D3] select-none flex flex-col justify-center items-center'>
+            <main className='bg-[#51C4D3] select-none flex flex-col justify-center items-center py-4'>
               {children}
             </main>
             <Toaster />

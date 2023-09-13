@@ -11,21 +11,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { useSession } from 'next-auth/react';
 import { getBankById } from '@/lib/api';
 import { getServerSession } from "next-auth";
   
-const FetchQuery = async(url: string) => {
-    let response = await fetch(url) //fetchDataByQuery(url)
-    let banks = await response.json();
-    let countryId = banks[0].countryId;
-    let countryName = await getBankById(countryId);
-    
-    if(!response.ok) {
-        throw new Error(`${response.statusText}: Failed to fetch your search.`)
-    }
-    return response.json()
-};
 type Params = {
     params: {
         bank: string
@@ -65,6 +53,9 @@ const SearchPage = async({ params: { bank } }: Params) => {
                         alt={ct.name}
                         width={400}
                         height={400}
+                        security='https'
+                        placeholder="blur"
+                        blurDataURL={ct.logo}
                     />
                     </CardContent>
                 </Card>

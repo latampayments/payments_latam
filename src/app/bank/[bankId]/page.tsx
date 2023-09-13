@@ -29,8 +29,8 @@ export default async function Bank({ params: { bankId } }: Params) {
 
   return (
     <div className="flex w-full flex-wrap justify-around items-start">
-      {methods.map((ct) => 
-      <Link key={ct.id} href={`/method/${ct.id}`}>
+      {methods.map((ct, index) => 
+      <Link key={index} href={`/method/${ct.id}`}>
       <Card className='flex flex-wrap bg-[#126E82] m-4 p-4 text-center w-96 text-white justify-center'>
           <CardHeader>
           <CardTitle>{ct.type}</CardTitle>
@@ -44,6 +44,9 @@ export default async function Bank({ params: { bankId } }: Params) {
                 alt={ct.type}
                 width={400}
                 height={400}
+                security='https'
+                placeholder="blur"
+                blurDataURL={ct?.symbol}
             />
           </CardContent>
       </Card>
