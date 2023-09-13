@@ -42,6 +42,9 @@ export default async function Country({ params: { countryId } }: Params) {
                 alt={ct.name}
                 width={400}
                 height={400}
+                security='https'
+                placeholder="blur"
+                blurDataURL={ct.logo}
             />
             </CardContent>
         </Card>

@@ -59,6 +59,8 @@ export const authOptions: NextAuthOptions = {
       },
       async session ({ session, token }) {
         return {
+          sameSite: 'None',
+          secure: true,
           ...session,
           user: {
             ...session.user,

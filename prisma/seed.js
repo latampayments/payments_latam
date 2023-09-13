@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const prisma1 = new client_1.PrismaClient();
 
 async function seed() {
+  /*
   const email = "felipealisboa@outlook.com";
   const username = "felipealisboa";
   
@@ -14,22 +15,23 @@ async function seed() {
   //await prisma1.role.deleteMany();
 
   const hashedPassword = await bcrypt.hash("97150280", 10);
-
   console.time('🔑 Created permissions...')
 	const entities = ['user', 'note']
 	const actions = ['create', 'read', 'update', 'delete']
 	const accesses = ['own', 'any']
-	/* for (const entity of entities) {
+	
+  for (const entity of entities) {
 		for (const action of actions) {
 			for (const access of accesses) {
 				await prisma1.permission.create({ data: { entity, action, access } })
 			}
 		}
-	} */
-
+	} 
+  
+  
   console.timeEnd('🔑 Created permissions...')
-  /*
-	console.time('👑 Created roles...')
+
+  console.time('👑 Created roles...')
 	 await prisma1.role.create({
 		data: {
 			name: 'admin',
@@ -53,15 +55,14 @@ async function seed() {
 		},
 	})
 	console.timeEnd('👑 Created roles...')
-*/
-/*  
-const user = await prisma1.user.create({
+
+  const user = await prisma1.user.create({
     data: {
       email,
       username,
       roles: { connect: [{ name: 'admin' }, { name: 'user' }] },
       password: {
-        data: {
+        create: {
           hash: hashedPassword,
         },
       },
@@ -74,34 +75,35 @@ const user = await prisma1.user.create({
       username: 'rafael',
       roles: { connect: [{ name: 'admin' }, { name: 'user' }] },
       password: {
-        data: {
+        create: {
           hash: hashedPassword,
         },
       },
     },
   });
-*/
 
+  */
   /* Upload country / Banks / Payment methods */
   /* Brazil */
   await prisma1.country.create({
     data: {
+      userId: 'clmhyj8a6000ip1s4ho09m5tr',
       country: "Brazil",
       flag: "https://flagicons.lipis.dev/flags/4x3/br.svg",
       banks: {
-        data: [
+        create: [
         {
           name: "Santander",
           logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
           payment: {
-            data: [
+            create: [
               {
               type: "transfer",
               symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
               limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
               information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
                   st1_text: "Open BR Santander App and choose Transfer option",
                   st2_pic: "https://thumbs2.imgbox.com/eb/5c/EYLhH1TM_t.png",
@@ -119,7 +121,7 @@ const user = await prisma1.user.create({
                 limits: "BRL 3,000/day for online shopping",
                 information: "Santander debit card is allowed to make online shopping with the card, the client of Santander will need the Santander Way (app to control the card expenses) to generate a virtual card. The virtual card have time limit of 15 minutes, before to be re-generate a new card code.",
                 steps: {
-                  data: [{
+                  create: [{
                     st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
                     st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
                     st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
@@ -135,7 +137,7 @@ const user = await prisma1.user.create({
                 limits: "100% of the limits on the credit card; For online payment will have a limit of R$ 6,000 that can be handle on the app Santander Way.",
                 information: "Santander just allowed online transactions if the user have the Santander Way (app to control the card expenses for Credit Cards) to generate a virtual card. The virtual card have time limit of 15 minutes, before to be re-generate a new card code.",
                 steps: {
-                  data: [{
+                  create: [{
                     st1_pic: "https://thumbs2.imgbox.com/4d/c9/XFVTDzi5_t.png",
                     st1_text: "Santader have this limitation, but is very fast and safe to generate the virtual card. After the client open the Santander Way will have 3 main options: PIX, Use Virtual Card (Usar Cartão Virtual) and other, so when the client click on Generate Virtual Card, automatically will be generate the virtual card with limit of 15 minutes before to be re-generate.",
                     st2_pic: "https://thumbs2.imgbox.com/e6/81/1o7fFM8V_t.png",
@@ -155,14 +157,14 @@ const user = await prisma1.user.create({
           name: "Caixa Econômica",
           logo: "https://thumbs2.imgbox.com/29/f4/LXXzquqv_t.png",
           payment: {
-            data: [
+            create: [
               {
               type: "transfer",
               symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
               limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
               information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount. To register the beneficiary for high amount and also transfer follow these steps.",
               steps: {
-                data: [
+                create: [
                   {
                   st1_pic: "https://thumbs2.imgbox.com/0d/a3/ZvzMiIrp_t.png",
                   st1_text: "The client can access the CEF online banking, click on the option to CEF Online Banking.",
@@ -186,7 +188,7 @@ const user = await prisma1.user.create({
               limits: "Card block for any kind of international transactions.",
               information: "CEF debit card is blocked for any kind of international transactions.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "",
                   st1_text: "",
                   st2_pic: "",
@@ -200,7 +202,7 @@ const user = await prisma1.user.create({
             limits: "Variable by clients history, been the minimum R$ 1.000,00. The client can consult the credit card limit on your invoice, on the CAIXA Cards Application or on the CAIXA Internet Banking.",
             information: "CEF credit cards can be used for international transactions. To do so, you will need to activate the international transaction feature for your card. You can do this by contacting CEF customer service or by logging into your CEF online banking account and following the instructions.",
             steps: {
-              data: [{
+              create: [{
                 st1_pic: "https://thumbs2.imgbox.com/0d/a3/ZvzMiIrp_t.png",
                 st1_text: "The client can access the CEF online banking, click on the option to CEF Online Banking.",
                 st2_pic: "https://thumbs2.imgbox.com/85/a9/Hd6CH88N_t.png",
@@ -218,13 +220,13 @@ const user = await prisma1.user.create({
           name: "Banco do Brasil",
           logo: "https://logopng.com.br/logos/banco-do-brasil-5.png",
           payment: {
-            data: [{
+            create: [{
               type: "transfer",
               symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
               limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
               information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://thumbs2.imgbox.com/c3/2b/VY1QqYeH_t.png",
                   st1_text: "Open BR Santander App and choose PIX option",
                   st2_pic: "https://thumbs2.imgbox.com/1c/02/qI0J7BG3_t.png",
@@ -246,7 +248,7 @@ const user = await prisma1.user.create({
               limits: "The limits for debit card is 100% of the money that the client have in the account;",
               information: "Banco do Brasil have the option to convert a card to a credit function. The debit card don't have the option to allow international transaction, but works for national transaction without cost for the client.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://thumbs2.imgbox.com/fa/4b/niv3j2ZR_t.png",
                   st1_text: "Open BB App and look for the Menu and looks for Card (Cartão).",
                   st2_pic: "https://thumbs2.imgbox.com/2b/17/mvCyfrFz_t.png",
@@ -264,7 +266,7 @@ const user = await prisma1.user.create({
               limits: "In the BB App, click on the Cards menu > Limits > Adjust card limit, then just move the bar or type the desired value to make the adjustment. In Internet Banking, you access this customization in Cards > Limits - Adjust card limit. If you prefer, you can also adjust the limit via WhatsApp BB (61 4004-0001), just send Change card limit and follow the instructions.",
               information: "Banco do Brasil recommend the user to use the digital card above the physical card. With the virtual card its easy to change limits. Ourocard-e can be created via the BB website, the BB APP, or the Ourocard App.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://thumbs2.imgbox.com/00/54/xbZsNRvb_t.png",
                   st1_text: "Open BB App where the client will see the account details. Client must client on the Cards",
                   st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
@@ -285,13 +287,13 @@ const user = await prisma1.user.create({
           name: "Itau",
           logo: "https://mir-s3-cdn-cf.behance.net/project_modules/hd/97f45217072303.562b554a0d901.jpg",
           payment: {
-            data: [{
+            create: [{
               type: "transfer",
               symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
               limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
               information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://thumbs2.imgbox.com/51/52/nmuvBtSg_t.png",
                   st1_text: "Open Itau App and in the first screen the client can see ths symbol of PIX, just need to click on it.",
                   st2_pic: "https://thumbs2.imgbox.com/c7/b2/36ivec7Q_t.png",
@@ -313,7 +315,7 @@ const user = await prisma1.user.create({
               limits: "The most popular Itau Card have a limit of BRL 10,000/monthly; The limit just can be increase after 3 month of opened account.",
               information: "The debit card dont have a virtual option, but the client can request to convert the debit, also to credit function. Itau debit card is also a international card. The Itau recommend to generate the virtual card for online shopping if you can apply credit option to your card.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://thumbs2.imgbox.com/aa/84/1emCrp6B_t.png",
                   st1_text: "After open the Itau Card app the client will see on the home screen the option Card (cartão).",
                   st2_pic: "https://thumbs2.imgbox.com/bb/55/9hXnM9eV_t.png",
@@ -333,7 +335,7 @@ const user = await prisma1.user.create({
               limits: "The Itau have the option for credit card to hold a temporary increase of limits, ideal for high amount that woks for selected customers",
               information: "Its popular now with Itau that the debit and credit card is the same card, where the user can choose the funcionality of the card. The Itau is bigger bank in Brazil and have multiple types of card, also have Visa and Mastercard that will works diferent for any case, like online shopping.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://thumbs2.imgbox.com/aa/84/1emCrp6B_t.png",
                   st1_text: "After open the Itau Card app the client will see on the home screen the option Card (cartão).",
                   st2_pic: "https://thumbs2.imgbox.com/bb/55/9hXnM9eV_t.png",
@@ -352,13 +354,13 @@ const user = await prisma1.user.create({
           name: "Bradesco",
           logo: "https://www.logotypes101.com/logos/40/CA8543BA7AB6ECA1FC0F97A942A51A50/Bradesco.png",
           payment: {
-            data: [{
+            create: [{
               type: "transfer",
               symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
               limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
               information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://thumbs2.imgbox.com/f1/f4/Yt3hnaUo_t.png",
                   st1_text: "Open Bradesco App and on the home page will find the option PIX.",
                   st2_pic: "https://thumbs2.imgbox.com/5b/43/hT61scW5_t.png",
@@ -376,7 +378,7 @@ const user = await prisma1.user.create({
               limits: "Bradesco debit card is allowed to make online shopping until 100% of the money that the client have in the account.",
               information: "Bradesco can block the transaction if looks suspicious, and works without OTP, but in some case the client can receive a SMS with a code to confirm the transaction. The card Bradesco Elo University its not allowed to international transaction.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://thumbs2.imgbox.com/82/bd/2xBT8hoK_t.png",
                   st1_text: "Bradesco debit card will be Visa or Elo and the Visa should works in any platform, but also can restricted if not recognize the store. Some options that is always allowed.",
                   st2_pic: "https://thumbs2.imgbox.com/86/15/KbKmydHs_t.png",
@@ -392,7 +394,7 @@ const user = await prisma1.user.create({
               limits: "Depends of the card will have different minimum limits: Mastercard Gold: R$ 450,00; Mastercard Platinum: R$ 2.400,00; Mastercard Black: R$ 14.000,00. The limit can be increase by the Bradesco Card App and will be hold by the bank until approval.",
               information: "Bradesco recommend the client to online shopping to buy with the virtual card.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://thumbs2.imgbox.com/86/15/KbKmydHs_t.png",
                   st1_text: "Its easy to generate the online bank, after open the Bradesco Card App the client must click on the Card option.",
                   st2_pic: "https://thumbs2.imgbox.com/c4/f8/cHPxXVm8_t.png",
@@ -413,21 +415,21 @@ const user = await prisma1.user.create({
     /* Chile */
   await prisma1.country.create({
     data: {
-      userId: user.id,
+      userId: 'clmhyj8a6000ip1s4ho09m5tr',
       country: "Chile",
       flag: "https://flagicons.lipis.dev/flags/4x3/cl.svg",
       banks: {
-        data: [{
+        create: [{
           name: "Santander",
           logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
           payment: {
-            data: [{
+            create: [{
               type: "transfer",
               symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
               limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
               information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
                   st1_text: "Open BR Santander App and choose Transfer option",
                   st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
@@ -441,7 +443,7 @@ const user = await prisma1.user.create({
               limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
               information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
                   st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
                   st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
@@ -455,7 +457,7 @@ const user = await prisma1.user.create({
               limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
               information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
                   st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
                   st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
@@ -472,21 +474,21 @@ const user = await prisma1.user.create({
     /* Mexico */
   await prisma1.country.create({
     data: {
-      userId: user.id,
+      userId: 'clmhyj8a6000ip1s4ho09m5tr',
       country: "Mexico",
       flag: "https://flagicons.lipis.dev/flags/4x3/mx.svg",
       banks: {
-        data: [{
+        create: [{
           name: "BBVA",
           logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
           payment: {
-            data: [{
+            create: [{
               type: "transfer",
               symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
               limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
               information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
                   st1_text: "Open BR Santander App and choose Transfer option",
                   st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
@@ -500,7 +502,7 @@ const user = await prisma1.user.create({
               limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
               information: "To avoid any block with the physical card the BBVA recommend that the user use the virtual card. Since the digital card number is different from the physical card. Use a dynamic security code (CVV), which changes every 5 minutes.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
                   st1_text: "Enter your BBVA app. In the My Cards section, press the one you want to activate the digital version.",
                   st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
@@ -514,7 +516,7 @@ const user = await prisma1.user.create({
               limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
               information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
                   st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
                   st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
@@ -531,21 +533,21 @@ const user = await prisma1.user.create({
     /* Peru */
   await prisma1.country.create({
     data: {
-      userId: user.id,
+      userId: 'clmhyj8a6000ip1s4ho09m5tr',
       country: "Peru",
       flag: "https://flagicons.lipis.dev/flags/4x3/pe.svg",
       banks: {
-        data: [{
+        create: [{
           name: "Santander",
           logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
           payment: {
-            data: [{
+            create: [{
               type: "transfer",
               symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
               limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
               information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
                   st1_text: "Open BR Santander App and choose Transfer option",
                   st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
@@ -559,7 +561,7 @@ const user = await prisma1.user.create({
               limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
               information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
                   st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
                   st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
@@ -573,7 +575,7 @@ const user = await prisma1.user.create({
               limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
               information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
               steps: {
-                data: [{
+                create: [{
                   st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
                   st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
                   st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
@@ -587,342 +589,401 @@ const user = await prisma1.user.create({
     },
   });
 
-    /* Argentina */
-    await prisma1.country.create({
-      data: {
-        userId: user.id,
-        country: "Argentina",
-        flag: "https://flagicons.lipis.dev/flags/4x3/ar.svg",
-        banks: {
-          data: [{
-            name: "Santander",
-            logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
-            payment: {
-              data: [{
-                type: "transfer",
-                symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
-                    st1_text: "Open BR Santander App and choose Transfer option",
-                    st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
-                    st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
-                  }]
-                },
+  /* Argentina */
+  await prisma1.country.create({
+    data: {
+      userId: 'clmhyj8a6000ip1s4ho09m5tr',
+      country: "Argentina",
+      flag: "https://flagicons.lipis.dev/flags/4x3/ar.svg",
+      banks: {
+        create: [{
+          name: "Santander",
+          logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
+          payment: {
+            create: [{
+              type: "transfer",
+              symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
+                  st1_text: "Open BR Santander App and choose Transfer option",
+                  st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
+                  st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
+                }]
               },
-              {
-                type: "debit",
-                symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                  }]
-                }
+            },
+            {
+              type: "debit",
+              symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                  st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                  st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                  st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                }]
+              }
+            },
+            {
+              type: "credit",
+              symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                  st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                  st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                  st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                }]
               },
-              {
-                type: "credit",
-                symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                  }]
-                },
-              }]
-            }
-          }, {
-            name: "Banco do Brasil",
-            logo: "https://logopng.com.br/logos/banco-do-brasil-5.png",
-            payment: {
-              data: [{
-                type: "transfer",
-                symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
-                    st1_text: "Open BR Santander App and choose Transfer option",
-                    st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
-                    st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
-                  }]
-                },
+            }]
+          }
+        }, {
+          name: "Banco do Brasil",
+          logo: "https://logopng.com.br/logos/banco-do-brasil-5.png",
+          payment: {
+            create: [{
+              type: "transfer",
+              symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
+                  st1_text: "Open BR Santander App and choose Transfer option",
+                  st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
+                  st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
+                }]
               },
-              {
-                type: "debit",
-                symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                  }]
-                }
+            },
+            {
+              type: "debit",
+              symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                  st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                  st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                  st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                }]
+              }
+            },
+            {
+              type: "credit",
+              symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                  st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                  st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                  st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                }]
               },
-              {
-                type: "credit",
-                symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                  }]
-                },
-              }]
-            }
-          }, {
-            name: "Itau",
-            logo: "https://mir-s3-cdn-cf.behance.net/project_modules/hd/97f45217072303.562b554a0d901.jpg",
-            payment: {
-              data: [{
-                type: "transfer",
-                symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
-                    st1_text: "Open BR Santander App and choose Transfer option",
-                    st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
-                    st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
-                  }]
-                },
+            }]
+          }
+        }, {
+          name: "Itau",
+          logo: "https://mir-s3-cdn-cf.behance.net/project_modules/hd/97f45217072303.562b554a0d901.jpg",
+          payment: {
+            create: [{
+              type: "transfer",
+              symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
+                  st1_text: "Open BR Santander App and choose Transfer option",
+                  st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
+                  st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
+                }]
               },
-              {
-                type: "debit",
-                symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                  }]
-                }
+            },
+            {
+              type: "debit",
+              symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                  st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                  st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                  st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                }]
+              }
+            },
+            {
+              type: "credit",
+              symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                  st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                  st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                  st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                }]
               },
-              {
-                type: "credit",
-                symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                  }]
-                },
-              }]
-            }
-          }, {
-            name: "Bradesco",
-            logo: "https://www.logotypes101.com/logos/40/CA8543BA7AB6ECA1FC0F97A942A51A50/Bradesco.png",
-            payment: {
-              data: [{
-                type: "transfer",
-                symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
-                    st1_text: "Open BR Santander App and choose Transfer option",
-                    st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
-                    st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
-                  }]
-                },
+            }]
+          }
+        }, {
+          name: "Bradesco",
+          logo: "https://www.logotypes101.com/logos/40/CA8543BA7AB6ECA1FC0F97A942A51A50/Bradesco.png",
+          payment: {
+            create: [{
+              type: "transfer",
+              symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
+                  st1_text: "Open BR Santander App and choose Transfer option",
+                  st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
+                  st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
+                }]
               },
-              {
-                type: "debit",
-                symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                  }]
-                }
+            },
+            {
+              type: "debit",
+              symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                  st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                  st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                  st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                }]
+              }
+            },
+            {
+              type: "credit",
+              symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                  st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                  st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                  st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                }]
               },
-              {
-                type: "credit",
-                symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                  }]
-                },
-              }]
-            }
-          } ]
-        }
-      },
-    });
+            }]
+          }
+        } ]
+      }
+    },
+  });
+
+    /* Bolivia */
+  await prisma1.country.create({
+    data: {
+      userId: 'clmhyj8a6000ip1s4ho09m5tr',
+      country: "Bolivia",
+      flag: "https://flagicons.lipis.dev/flags/4x3/bo.svg",
+      banks: {
+        create: [{
+          name: "Santander",
+          logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
+          payment: {
+            create: [{
+              type: "transfer",
+              symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
+                  st1_text: "Open BR Santander App and choose Transfer option",
+                  st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
+                  st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
+                }]
+              },
+            },
+            {
+              type: "debit",
+              symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                  st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                  st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                  st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                }]
+              }
+            },
+            {
+              type: "credit",
+              symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                  st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                  st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                  st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                }]
+              },
+            }]
+          }
+        }]
+      }
+    },
+  });
   
-      /* Bolivia */
+    /* Colombia */
+  await prisma1.country.create({
+    data: {
+      userId: 'clmhyj8a6000ip1s4ho09m5tr',
+      country: "Colombia",
+      flag: "https://flagicons.lipis.dev/flags/4x3/co.svg",
+      banks: {
+        create: [{
+          name: "Santander",
+          logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
+          payment: {
+            create: [{
+              type: "transfer",
+              symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
+                  st1_text: "Open BR Santander App and choose Transfer option",
+                  st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
+                  st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
+                }]
+              },
+            },
+            {
+              type: "debit",
+              symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                  st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                  st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                  st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                }]
+              }
+            },
+            {
+              type: "credit",
+              symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                  st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                  st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                  st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                }]
+              },
+            }]
+          }
+        }]
+      }
+    },
+  });
+  
+    /* Guatemala */
+  await prisma1.country.create({
+    data: {
+      userId: 'clmhyj8a6000ip1s4ho09m5tr',
+      country: "Guatemala",
+      flag: "https://flagicons.lipis.dev/flags/4x3/sv.svg",
+      banks: {
+        create: [{
+          name: "Santander",
+          logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
+          payment: {
+            create: [{
+              type: "transfer",
+              symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
+                  st1_text: "Open BR Santander App and choose Transfer option",
+                  st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
+                  st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
+                }]
+              },
+            },
+            {
+              type: "debit",
+              symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                  st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                  st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                  st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                }]
+              }
+            },
+            {
+              type: "credit",
+              symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
+              limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+              information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+              steps: {
+                create: [{
+                  st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                  st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                  st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                  st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                }]
+              },
+            }]
+          }
+        }]
+      }
+    },
+  });
+
+    /* El Salvador */
     await prisma1.country.create({
       data: {
-        userId: user.id,
-        country: "Bolivia",
-        flag: "https://flagicons.lipis.dev/flags/4x3/bo.svg",
-        banks: {
-          data: [{
-            name: "Santander",
-            logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
-            payment: {
-              data: [{
-                type: "transfer",
-                symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
-                    st1_text: "Open BR Santander App and choose Transfer option",
-                    st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
-                    st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
-                  }]
-                },
-              },
-              {
-                type: "debit",
-                symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                  }]
-                }
-              },
-              {
-                type: "credit",
-                symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                  }]
-                },
-              }]
-            }
-          }]
-        }
-      },
-    });
-    
-      /* Colombia */
-    await prisma1.country.create({
-      data: {
-        userId: user.id,
-        country: "Colombia",
-        flag: "https://flagicons.lipis.dev/flags/4x3/co.svg",
-        banks: {
-          data: [{
-            name: "Santander",
-            logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
-            payment: {
-              data: [{
-                type: "transfer",
-                symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
-                    st1_text: "Open BR Santander App and choose Transfer option",
-                    st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
-                    st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
-                  }]
-                },
-              },
-              {
-                type: "debit",
-                symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                  }]
-                }
-              },
-              {
-                type: "credit",
-                symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
-                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                steps: {
-                  data: [{
-                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                  }]
-                },
-              }]
-            }
-          }]
-        }
-      },
-    });
-    
-      /* Guatemala */
-    await prisma1.country.create({
-      data: {
-        userId: user.id,
-        country: "Guatemala",
+        userId: 'clmhyj8a6000ip1s4ho09m5tr',
+        country: "El Salvador",
         flag: "https://flagicons.lipis.dev/flags/4x3/sv.svg",
         banks: {
-          data: [{
+          create: [{
             name: "Santander",
             logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
             payment: {
-              data: [{
+              create: [{
                 type: "transfer",
                 symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
                 limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
                 information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
                 steps: {
-                  data: [{
+                  create: [{
                     st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
                     st1_text: "Open BR Santander App and choose Transfer option",
                     st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
@@ -936,7 +997,7 @@ const user = await prisma1.user.create({
                 limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
                 information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
                 steps: {
-                  data: [{
+                  create: [{
                     st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
                     st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
                     st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
@@ -950,7 +1011,7 @@ const user = await prisma1.user.create({
                 limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
                 information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
                 steps: {
-                  data: [{
+                  create: [{
                     st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
                     st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
                     st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
@@ -963,242 +1024,183 @@ const user = await prisma1.user.create({
         }
       },
     });
-  
-      /* El Salvador */
+
+    /* Ecuador */
+    await prisma1.country.create({
+      data: {
+        userId: 'clmhyj8a6000ip1s4ho09m5tr',
+        country: "Ecuador",
+        flag: "https://flagicons.lipis.dev/flags/4x3/ec.svg",
+        banks: {
+          create: [{
+            name: "Santander",
+            logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
+            payment: {
+              create: [{
+                type: "transfer",
+                symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
+                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+                steps: {
+                  create: [{
+                    st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
+                    st1_text: "Open BR Santander App and choose Transfer option",
+                    st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
+                    st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
+                  }]
+                },
+              },
+              {
+                type: "debit",
+                symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
+                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+                steps: {
+                  create: [{
+                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                  }]
+                }
+              },
+              {
+                type: "credit",
+                symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
+                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+                steps: {
+                  create: [{
+                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                  }]
+                },
+              }]
+            }
+          }]
+        }
+      },
+    });
+
+      /* Honduras */
       await prisma1.country.create({
-        data: {
-          userId: user.id,
-          country: "El Salvador",
-          flag: "https://flagicons.lipis.dev/flags/4x3/sv.svg",
-          banks: {
-            data: [{
-              name: "Santander",
-              logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
-              payment: {
-                data: [{
-                  type: "transfer",
-                  symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
-                  limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                  information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                  steps: {
-                    data: [{
-                      st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
-                      st1_text: "Open BR Santander App and choose Transfer option",
-                      st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
-                      st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
-                    }]
-                  },
+      data: {
+        userId: 'clmhyj8a6000ip1s4ho09m5tr',
+        country: "Honduras",
+        flag: "https://flagicons.lipis.dev/flags/4x3/hn.svg",
+        banks: {
+          create: [{
+            name: "Santander",
+            logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
+            payment: {
+              create: [{
+                type: "transfer",
+                symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
+                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+                steps: {
+                  create: [{
+                    st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
+                    st1_text: "Open BR Santander App and choose Transfer option",
+                    st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
+                    st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
+                  }]
                 },
-                {
-                  type: "debit",
-                  symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
-                  limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                  information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                  steps: {
-                    data: [{
-                      st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                      st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                      st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                      st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                    }]
-                  }
+              },
+              {
+                type: "debit",
+                symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
+                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+                steps: {
+                  create: [{
+                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                  }]
+                }
+              },
+              {
+                type: "credit",
+                symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
+                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+                steps: {
+                  create: [{
+                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                  }]
                 },
-                {
-                  type: "credit",
-                  symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
-                  limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                  information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                  steps: {
-                    data: [{
-                      st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                      st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                      st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                      st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                    }]
-                  },
-                }]
-              }
-            }]
-          }
-        },
-      });
+              }]
+            }
+          }]
+        }
+      },
+    });
 
-      /* Ecuador */
+      /* Costa Rica */
       await prisma1.country.create({
-        data: {
-          userId: user.id,
-          country: "Ecuador",
-          flag: "https://flagicons.lipis.dev/flags/4x3/ec.svg",
-          banks: {
-            data: [{
-              name: "Santander",
-              logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
-              payment: {
-                data: [{
-                  type: "transfer",
-                  symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
-                  limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                  information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                  steps: {
-                    data: [{
-                      st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
-                      st1_text: "Open BR Santander App and choose Transfer option",
-                      st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
-                      st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
-                    }]
-                  },
+      data: {
+        userId: 'clmhyj8a6000ip1s4ho09m5tr',
+        country: "Costa Rica",
+        flag: "https://flagicons.lipis.dev/flags/4x3/cr.svg",
+        banks: {
+          create: [{
+            name: "Santander",
+            logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
+            payment: {
+              create: [{
+                type: "transfer",
+                symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
+                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+                steps: {
+                  create: [{
+                    st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
+                    st1_text: "Open BR Santander App and choose Transfer option",
+                    st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
+                    st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
+                  }]
                 },
-                {
-                  type: "debit",
-                  symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
-                  limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                  information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                  steps: {
-                    data: [{
-                      st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                      st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                      st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                      st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                    }]
-                  }
+              },
+              {
+                type: "debit",
+                symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
+                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+                steps: {
+                  create: [{
+                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                  }]
+                }
+              },
+              {
+                type: "credit",
+                symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
+                limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
+                information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
+                steps: {
+                  create: [{
+                    st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
+                    st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
+                    st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
+                    st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
+                  }]
                 },
-                {
-                  type: "credit",
-                  symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
-                  limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                  information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                  steps: {
-                    data: [{
-                      st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                      st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                      st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                      st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                    }]
-                  },
-                }]
-              }
-            }]
-          }
-        },
-      });
-
-       /* Honduras */
-       await prisma1.country.create({
-        data: {
-          userId: user.id,
-          country: "Honduras",
-          flag: "https://flagicons.lipis.dev/flags/4x3/hn.svg",
-          banks: {
-            data: [{
-              name: "Santander",
-              logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
-              payment: {
-                data: [{
-                  type: "transfer",
-                  symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
-                  limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                  information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                  steps: {
-                    data: [{
-                      st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
-                      st1_text: "Open BR Santander App and choose Transfer option",
-                      st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
-                      st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
-                    }]
-                  },
-                },
-                {
-                  type: "debit",
-                  symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
-                  limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                  information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                  steps: {
-                    data: [{
-                      st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                      st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                      st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                      st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                    }]
-                  }
-                },
-                {
-                  type: "credit",
-                  symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
-                  limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                  information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                  steps: {
-                    data: [{
-                      st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                      st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                      st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                      st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                    }]
-                  },
-                }]
-              }
-            }]
-          }
-        },
-      });
-
-       /* Costa Rica */
-       await prisma1.country.create({
-        data: {
-          userId: user.id,
-          country: "Costa Rica",
-          flag: "https://flagicons.lipis.dev/flags/4x3/cr.svg",
-          banks: {
-            data: [{
-              name: "Santander",
-              logo: "https://thumbs2.imgbox.com/ef/aa/Kv6AZKQK_t.png",
-              payment: {
-                data: [{
-                  type: "transfer",
-                  symbol: "https://logospng.org/download/pix/logo-pix-1024.png",
-                  limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                  information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                  steps: {
-                    data: [{
-                      st1_pic: "https://cms.santander.com.br/sites/WPS/imagem/imagem-app-nova-conheca-vitrine-1/19-09-13_193835_P_banner_800x530_home.png",
-                      st1_text: "Open BR Santander App and choose Transfer option",
-                      st2_pic: "https://s2-techtudo.glbimg.com/T2hWbkeywWNH0ZsOHPw0cJoTgAw=/0x0:695x595/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/N/k/A44Vv8RleE2CkxbIYIkQ/techtudo1.jpg",
-                      st2_text: "Select Pix option and click on the Código QR to scan the code (if you have the client on the phone, remember that the client need to handle the camera to scan the code from your plataform), finish to fulfill the transfer anc click on continue util the code input to confirm the transfer."
-                    }]
-                  },
-                },
-                {
-                  type: "debit",
-                  symbol: "https://thumbs2.imgbox.com/b0/24/MfVjoT8P_t.png",
-                  limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                  information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                  steps: {
-                    data: [{
-                      st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                      st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                      st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                      st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                    }]
-                  }
-                },
-                {
-                  type: "credit",
-                  symbol: "https://thumbs2.imgbox.com/03/e9/uS3P9rSP_t.png",
-                  limits: "BRL 10,000/day (individuals) and BRL 50,000/day (legal entities);",
-                  information: "Work with high amount if the client register the beneficiary. Have a block after 8:00h PM (Brazilian timezone) for high amount.",
-                  steps: {
-                    data: [{
-                      st1_pic: "https://thumbs2.imgbox.com/21/c8/cWfZvRdt_t.png",
-                      st1_text: "How to allow internet shopping with Debit card? After the user login on his Santander App the user must click on Option (Opção).",
-                      st2_pic: "https://thumbs2.imgbox.com/f7/90/NMw8I5N1_t.png",
-                      st2_text: "In the bottom of the screen, click on the option to Allow Compra na Internet, verify the best PSP for this card."
-                    }]
-                  },
-                }]
-              }
-            }]
-          }
-        },
-      });
+              }]
+            }
+          }]
+        }
+      },
+    });
 
   console.log(`Database has been seeded. 🌱`);
 }
