@@ -10,10 +10,10 @@ const Navbar = async () => {
   const session = await getServerSession(authOptions);
   return (
     <>
-      <div className='bg-[#F6F6F6] py-2 border-b border-s-zinc-200 w-full'>
+      <div className='bg-[#D8E3E7] py-2 border-b border-s-zinc-200 w-full'>
         <div className='flex items-center justify-around my-4'>
           <Link href='/'>
-            <Image src='/logo.png' alt='Latam Payments' width={300} height={100} className='rounded bg-inherit' />
+            <Image src='/logo.png' alt='Latam Payments' width={200} height={100} className='rounded bg-inherit' />
           </Link>
           <div>
           </div>

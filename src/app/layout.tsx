@@ -1,10 +1,10 @@
+import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import Provider from '@/components/Provider';
 import { Toaster } from '@/components/ui/toaster';
 import '@/styles/globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { useEffect } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +19,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
 
-
   return (
     <html lang='en'>
       <head>
@@ -31,12 +30,13 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <Provider>
-          <div className='flex flex-col space-y-2 py-2'>
+          <div className='flex flex-col'>
             <Navbar />
-            <main className='bg-[#D6E4F0] select-none py-4 flex flex-col justify-center items-center'>
+            <main className='bg-[#51C4D3] select-none flex flex-col justify-center items-center'>
               {children}
             </main>
             <Toaster />
+            <Footer />
           </div>
         </Provider>
       </body>
