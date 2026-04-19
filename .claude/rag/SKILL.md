@@ -74,7 +74,7 @@ model Chunk {
   endSec       Int
   tokenCount   Int
 
-  // pgvector column — 384 dims for bge-small-en-v1.5
+  // pgvector column — 384 dims for multilingual-e5-small
   // Add manually in migration: ALTER TABLE "Chunk" ADD COLUMN embedding vector(384);
   // Then index: CREATE INDEX ON "Chunk" USING hnsw (embedding vector_cosine_ops);
 
@@ -223,7 +223,7 @@ import { pipeline } from '@xenova/transformers'
 let embedder: any
 async function getEmbedder() {
   if (!embedder) {
-    embedder = await pipeline('feature-extraction', 'Xenova/bge-small-en-v1.5')
+    embedder = await pipeline('feature-extraction', 'Xenova/multilingual-e5-small')
   }
   return embedder
 }
@@ -448,7 +448,7 @@ npm run rag:ask -- "What's the daily limit for Itau Visa on forex?"
 - **pgvector**: https://github.com/pgvector/pgvector
 - **Supabase + pgvector guide**: https://supabase.com/docs/guides/ai
 - **Transformers.js (local embeddings)**: https://huggingface.co/docs/transformers.js
-- **bge-small-en-v1.5 model card**: https://huggingface.co/BAAI/bge-small-en-v1.5
+- **multilingual-e5-small model card**: https://huggingface.co/intfloat/multilingual-e5-small (pt/es/en, 384 dims)
 - **Claude prompt caching**: https://docs.claude.com/en/docs/build-with-claude/prompt-caching
 - **Claude pricing**: https://www.anthropic.com/pricing
 - **youtube-transcript (npm)**: https://www.npmjs.com/package/youtube-transcript

@@ -150,3 +150,70 @@ model Connection {
   @@unique([providerName, providerId])
   @@unique([providerId, userId])
 }
+
+model Transcript {
+  id          String   @id @default(cuid())
+  videoId     String   @unique           // YouTube video ID
+  url         String
+  title       String
+  channel     String
+  publishedAt DateTime
+  language    String                      // 'pt', 'es', 'en'
+  rawText     String   @db.Text
+  durationSec Int
+
+  // Tagging for retrieval
+  country     String
+  bankName    String
+  cardType    String?                     // 'visa' | 'mastercard' | 'amex' | null
+  paymentType String?                     // 'deposit' | 'withdraw' | 'general'
+
+  createdAt   DateTime @default(now())
+  chunks      Chunk[]
+
+  @@index([country, bankName])
+}
+
+model Chunk {
+  id           String   @id @default(cuid())
+  transcript   Transcript @relation(fields: [transcriptId], references: [id], onDelete: Cascade)
+  transcriptId String
+
+  idx          Int                        // order within transcript
+  text         String   @db.Text
+  startSec     Int                        // for "see video at 2:34"
+  endSec       Int
+  tokenCount   Int
+
+  // pgvector column — 384 dims for multilingual-e5-small
+  // Add manually in migration: ALTER TABLE "Chunk" ADD COLUMN embedding vector(384);
+  // Then index: CREATE INDEX ON "Chunk" USING hnsw (embedding vector_cosine_ops);
+
+  @@index([transcriptId, idx])
+}
+
+model QueryCache {
+  id         String   @id @default(cuid())
+  queryHash  String   @unique             // sha256(lowercased query)
+  query      String
+  answer     String   @db.Text
+  chunkIds   String[]                     // provenance
+  model      String                       // 'haiku' | 'sonnet'
+  tokensIn   Int
+  tokensOut  Int
+  costUsd    Float
+  hits       Int      @default(1)
+  createdAt  DateTime @default(now())
+}
+
+model CostLedger {
+  id        String   @id @default(cuid())
+  date      DateTime @default(now())
+  model     String
+  tokensIn  Int
+  tokensOut Int
+  costUsd   Float
+  queryType String                        // 'classify' | 'simple' | 'complex' | 'embed'
+
+  @@index([date])
+}
